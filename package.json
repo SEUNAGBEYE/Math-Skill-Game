@@ -1,0 +1,39 @@
+{
+  "name": "Math-Skill-Game",
+  "version": "1.0.0",
+  "description": "This code is gotten from the Pluralsight React:js Getting started tutorial by Samer Buna ",
+  "main": "index.js",
+  "repository": "git@github.com:SEUNAGBEYE/Math-Skill-Game.git",
+  "author": "SEUNAGBEYE <agbeyeseun1@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "boostrap": "^2.0.0",
+    "bootstrap": "3",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.9.3",
+    "react": "^16.5.2",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.5.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "font-awesome": "^4.7.0",
+    "font-awesome-loader": "^1.0.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
