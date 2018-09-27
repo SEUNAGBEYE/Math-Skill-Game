@@ -7,11 +7,35 @@
   "author": "SEUNAGBEYE <agbeyeseun1@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "bootstrap": "4.1.2",
+    "css-loader": "1.0.0",
+    "file-loader": "2.0.0",
+    "lodash": "4.17.11",
+    "node-sass": "4.9.3",
+    "react": "16.5.2",
+    "react-bootstrap": "0.32.4",
+    "react-dom": "16.5.2",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.0",
+    "url-loader": "1.1.1"
+  },
   "devDependencies": {
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1"
+    "@babel/core": "7.1.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.2",
+    "eslint": "5.6.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.1",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.1",
+    "webpack-dev-server": "3.1.9"
   }
 }
