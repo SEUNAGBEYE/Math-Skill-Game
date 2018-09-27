@@ -1,0 +1,10 @@
+{
+  "name": "Math-Skill-Game",
+  "version": "1.0.0",
+  "description": "This code is gotten from the Pluralsight React:js Getting started tutorial by Samer Buna ",
+  "main": "app.js",
+  "repository": "git@github.com:SEUNAGBEYE/Math-Skill-Game.git",
+  "author": "SEUNAGBEYE <agbeyeseun1@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
