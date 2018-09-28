@@ -1,5 +1,8 @@
 {
     "extends": "airbnb",
+    "rules": {
+        "click-events-have-key-events": "off"
+    },
     "globals": {
         "document": true
     }
