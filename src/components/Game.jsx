@@ -1,4 +1,5 @@
 import React from 'react';
+import Stars from './Stars';
 
 
 /**
@@ -51,10 +52,16 @@ static randomNumber = () => 1 + Math.floor(Math.random() * 9)
    * @memberof Game
    */
   render(){
+    const { 
+      randomNumberOfStars, 
+    } = this.state;
     return(
         <div className="container">
             <h3>Play Nine</h3>
             <hr />
+            <div className="row">
+		          <Stars randomNumberOfStars={randomNumberOfStars}/>
+		        </div>
         </div>
     )
   }
