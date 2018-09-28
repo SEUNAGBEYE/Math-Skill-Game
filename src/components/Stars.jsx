@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Star Component
+ * renders the star randomly
+ *
+ * @param {props} randomNumberOfStars
+ * @returns
+ */
 const Stars = ({ randomNumberOfStars }) => {
   const stars = [
     ...Array(randomNumberOfStars).keys(),
