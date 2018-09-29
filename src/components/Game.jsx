@@ -1,7 +1,7 @@
 import React from 'react';
 import Stars from './Stars';
-import Numbers from './Numbers'
-import Answer from './Answer'
+import Numbers from './Numbers';
+import Answer from './Answer';
 
 
 /**
@@ -73,8 +73,6 @@ unselectNumber = (clickedNumber) => {
     selectedNumbers: prevState.selectedNumbers.filter(num => num !== clickedNumber)
   }))
 }
-
-  
   
   /**
    * Renders the component
