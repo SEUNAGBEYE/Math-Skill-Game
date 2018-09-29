@@ -48,8 +48,8 @@ const Button = ({
         onClick={redraw}
         disabled={!redraws}
       >
-        <i className="fa fa-sync" />
-        {redraws}
+        <i className="fa fa-refresh" />
+         {redraws}
       </button>
     </div>
   );
@@ -65,6 +65,7 @@ const propTypes = {
 };
 
 Button.propTypes = propTypes;
+
 Button.defaultProps = {
   answerIsCorrect: null,
 };
