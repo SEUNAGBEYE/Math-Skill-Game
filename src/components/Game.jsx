@@ -1,8 +1,12 @@
 import React from 'react';
+import range from 'lodash/range'
+
 import Stars from './Stars';
 import Numbers from './Numbers';
 import Answer from './Answer';
 import Button from './Button';
+import DoneFrame from './DoneFrame';
+import possibleCombinationSum from '../utilities/possibleCombinationSum'
 
 
 /**
@@ -12,7 +16,6 @@ import Button from './Button';
  * @extends {React.Component}
  */
 class Game extends React.Component {
-
 
   /**
    * Generates a random number between 1-9
@@ -54,7 +57,7 @@ class Game extends React.Component {
    * @param {number} clickedNumber
    */
   selectNumber = (clickedNumber) => {
-      if (!this.state.selectedNumbers.includes(clickedNumber)){ 
+      if (!this.state.selectedNumbers.includes(clickedNumber) && !this.state.usedNumbers.includes(clickedNumber)){ 
         this.setState(prevState => ({
           answerIsCorrect: null,
           selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
@@ -107,13 +110,40 @@ class Game extends React.Component {
    */
   redraw = () => {
   	if (this.state.redraws){
-	  this.setState(prevState => ({
-			answerIsCorrect: null,
-			selectedNumbers: [],
-			randomNumberOfStars: Game.randomNumber(),
-			redraws: prevState.redraws - 1
-		}), this.updateDoneStatus)
-	}
+      this.setState(prevState => ({
+        answerIsCorrect: null,
+        selectedNumbers: [],
+        randomNumberOfStars: Game.randomNumber(),
+        redraws: prevState.redraws - 1
+      }), this.updateDoneStatus)
+	  }
+  }
+
+/**
+ * Updates the status of the game
+ *
+ * @memberof Game
+ */
+updateDoneStatus = () => {
+  	this.setState(prevState => {
+      if (prevState.usedNumbers.length === 9) {
+        return { doneStatus: 'Done. Nice!' }
+      }
+      
+      if (!prevState.redraws && !this.possibleSolutions(prevState)){
+        return { doneStatus: 'Game Over!' }
+      }
+	  })  
+  }
+  
+  /**
+   * Checks for possible solutions
+   *
+   * @memberof Game
+   */
+  possibleSolutions = ({randomNumberOfStars, usedNumbers}) => {
+  	const possibleNumbers = range(1, 10).filter(num => !usedNumbers.includes(num));
+	  return possibleCombinationSum(possibleNumbers, randomNumberOfStars);
   }
 
   
@@ -129,7 +159,8 @@ class Game extends React.Component {
       selectedNumbers,
       usedNumbers,
       redraws,
-      answerIsCorrect
+      answerIsCorrect,
+      doneStatus
     } = this.state;
     return(
         <div className="container">
@@ -148,10 +179,15 @@ class Game extends React.Component {
 		  	        unselectNumber={this.unselectNumber}
 		          />
               <br />
-              <Numbers selectedNumbers={selectedNumbers}
-                selectNumber={this.selectNumber}
-                usedNumbers={usedNumbers}
-			        /> 
+              {
+                doneStatus ?
+                      <DoneFrame doneStatus={doneStatus} resetGame={this.resetGame}/>
+                :
+                <Numbers selectedNumbers={selectedNumbers}
+                  selectNumber={this.selectNumber}
+                  usedNumbers={usedNumbers}
+                /> 
+              }
 		        </div>
         </div>
     )
