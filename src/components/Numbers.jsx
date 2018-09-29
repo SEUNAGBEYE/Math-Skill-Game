@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import range from 'lodash/range';
-
 /**
  * Number componet
  * renders the available numbers
  *
  * @param {props} selectedNumbers
+ * @param {props} selectNumber
  * @param {props} usedNumbers
  * @returns JSX
  */

@@ -51,17 +51,15 @@ static randomNumber = () => 1 + Math.floor(Math.random() * 9)
    * Handle the onclick event on the Number component
    *
    * @param {number} clickedNumber
-   * @memberof Game
    */
 selectNumber = (clickedNumber) => {
 		if (!this.state.selectedNumbers.includes(clickedNumber) ){ 
-      this.setState(prevState => ({
-        answerIsCorrect: null,
-      selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
-      }))
-	  }
+	  this.setState(prevState => ({
+	  	answerIsCorrect: null,
+		selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
+	  }))
+	}
 }
-
 
 /**
  * Handle the onclick event on the Answer component
@@ -76,6 +74,7 @@ unselectNumber = (clickedNumber) => {
   }))
 }
 
+  
   
   /**
    * Renders the component
