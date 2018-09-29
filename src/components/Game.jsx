@@ -2,6 +2,7 @@ import React from 'react';
 import Stars from './Stars';
 import Numbers from './Numbers';
 import Answer from './Answer';
+import Button from './Button';
 
 
 /**
@@ -13,13 +14,13 @@ import Answer from './Answer';
 class Game extends React.Component {
 
 
-/**
- * Generates a random number between 1-9
- *
- * @static
- * @memberof Game
- */
-static randomNumber = () => 1 + Math.floor(Math.random() * 9)
+  /**
+   * Generates a random number between 1-9
+   *
+   * @static
+   * @memberof Game
+   */
+  static randomNumber = () => 1 + Math.floor(Math.random() * 9)
 
   /**
    * This returns the component initial state
@@ -34,7 +35,7 @@ static randomNumber = () => 1 + Math.floor(Math.random() * 9)
       answerIsCorrect: null,
       redraws: 5,
       doneStatus: null
-      });
+  });
     
   state = Game.initialState()
 
@@ -44,7 +45,7 @@ static randomNumber = () => 1 + Math.floor(Math.random() * 9)
    * @memberof Game
    */
   resetGame = () => {
-      this.setState(Game.initialState())
+    this.setState(Game.initialState())
   }
 
   /**
@@ -52,27 +53,69 @@ static randomNumber = () => 1 + Math.floor(Math.random() * 9)
    *
    * @param {number} clickedNumber
    */
-selectNumber = (clickedNumber) => {
-		if (!this.state.selectedNumbers.includes(clickedNumber) ){ 
-	  this.setState(prevState => ({
-	  	answerIsCorrect: null,
-		selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
-	  }))
-	}
-}
+  selectNumber = (clickedNumber) => {
+      if (!this.state.selectedNumbers.includes(clickedNumber)){ 
+        this.setState(prevState => ({
+          answerIsCorrect: null,
+          selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
+        }))
+      }
+  }
 
-/**
- * Handle the onclick event on the Answer component
- *
- * @param {number} clickedNumber
- * @memberof Game
- */
-unselectNumber = (clickedNumber) => {
-  this.setState(prevState => ({
-    answerIsCorrect: null,
-    selectedNumbers: prevState.selectedNumbers.filter(num => num !== clickedNumber)
-  }))
-}
+  /**
+   * Handle the onclick event on the Answer component
+   *
+   * @param {number} clickedNumber
+   * @memberof Game
+   */
+  unselectNumber = (clickedNumber) => {
+    this.setState(prevState => ({
+      answerIsCorrect: null,
+      selectedNumbers: prevState.selectedNumbers.filter(num => num !== clickedNumber)
+    }))
+  }
+
+  /**
+   * Checks if the answers provided are corrent
+   *
+   * @memberof Game
+   */
+  checkAnswer = () => {
+    this.setState(prevState => ({
+      answerIsCorrect: prevState.randomNumberOfStars === prevState.selectedNumbers.reduce((acc, num) => acc + num, 0)
+    }))
+  }
+  
+  /**
+   * Accepts correct answers
+   *
+   * @memberof Game
+   */
+  acceptAnswer = () => {
+    this.setState(prevState => ({
+      usedNumbers: prevState.usedNumbers.concat(prevState.selectedNumbers),
+      selectedNumbers: [],
+      answerIsCorrect: null,
+      randomNumberOfStars: Game.randomNumber(),
+    }), this.updateDoneStatus)
+  }
+   
+	/**
+   * Redraw the game
+   *
+   * @memberof Game
+   */
+  redraw = () => {
+  	if (this.state.redraws){
+	  this.setState(prevState => ({
+			answerIsCorrect: null,
+			selectedNumbers: [],
+			randomNumberOfStars: Game.randomNumber(),
+			redraws: prevState.redraws - 1
+		}), this.updateDoneStatus)
+	}
+  }
+
   
   /**
    * Renders the component
@@ -84,7 +127,9 @@ unselectNumber = (clickedNumber) => {
     const { 
       randomNumberOfStars,
       selectedNumbers,
-      usedNumbers
+      usedNumbers,
+      redraws,
+      answerIsCorrect
     } = this.state;
     return(
         <div className="container">
@@ -92,9 +137,17 @@ unselectNumber = (clickedNumber) => {
             <hr />
             <div className="row">
 		          <Stars randomNumberOfStars={randomNumberOfStars}/>
+              <Button selectedNumbers={selectedNumbers} 
+                checkAnswer={this.checkAnswer}
+                answerIsCorrect={answerIsCorrect}
+                acceptAnswer={this.acceptAnswer}
+                redraw={this.redraw}
+                redraws={redraws}
+		          />
               <Answer selectedNumbers={selectedNumbers}
 		  	        unselectNumber={this.unselectNumber}
 		          />
+              <br />
               <Numbers selectedNumbers={selectedNumbers}
                 selectNumber={this.selectNumber}
                 usedNumbers={usedNumbers}
