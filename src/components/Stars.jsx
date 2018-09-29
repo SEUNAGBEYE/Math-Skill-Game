@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * renders the star randomly
  *
  * @param {props} randomNumberOfStars
- * @returns
+ * @returns JSX
  */
 const Stars = ({ randomNumberOfStars }) => {
   const stars = [

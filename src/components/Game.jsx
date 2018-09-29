@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from './Stars';
-import Numbers from './Numbers'
+import Numbers from './Numbers';
+import Answer from './Answer';
 
 
 /**
@@ -58,7 +59,20 @@ selectNumber = (clickedNumber) => {
 		selectedNumbers: prevState.selectedNumbers.concat(clickedNumber)
 	  }))
 	}
-  }
+}
+
+/**
+ * Handle the onclick event on the Answer component
+ *
+ * @param {number} clickedNumber
+ * @memberof Game
+ */
+unselectNumber = (clickedNumber) => {
+  this.setState(prevState => ({
+    answerIsCorrect: null,
+    selectedNumbers: prevState.selectedNumbers.filter(num => num !== clickedNumber)
+  }))
+}
   
   /**
    * Renders the component
@@ -78,6 +92,9 @@ selectNumber = (clickedNumber) => {
             <hr />
             <div className="row">
 		          <Stars randomNumberOfStars={randomNumberOfStars}/>
+              <Answer selectedNumbers={selectedNumbers}
+		  	        unselectNumber={this.unselectNumber}
+		          />
               <Numbers selectedNumbers={selectedNumbers}
                 selectNumber={this.selectNumber}
                 usedNumbers={usedNumbers}

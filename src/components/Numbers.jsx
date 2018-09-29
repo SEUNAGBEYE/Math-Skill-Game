@@ -6,10 +6,11 @@ import range from 'lodash/range';
  * renders the available numbers
  *
  * @param {props} selectedNumbers
+ * @param {props} selectNumber
  * @param {props} usedNumbers
- * @returns
+ * @returns JSX
  */
-const Numbers = ({ selectedNumbers, usedNumbers }) => {
+const Numbers = ({ selectedNumbers, usedNumbers, selectNumber }) => {
   // Use the lodash range func to generate this sequence
   const arrayOfNumbers = range(1, 10);
   const numberClassName = (num) => {
@@ -29,7 +30,7 @@ const Numbers = ({ selectedNumbers, usedNumbers }) => {
               <span
                 key={index}
                 className={numberClassName(num)}
-                onClick={() => props.selectNumber(num)}
+                onClick={() => selectNumber(num)}
               >
                 {num}
               </span>
